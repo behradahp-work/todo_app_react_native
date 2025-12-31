@@ -5,9 +5,37 @@ export default function useFetch<TResponse, TRequest = null>() {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string | null>(null);
 
-  const getMethod = async (url: string) => {};
+  const getMethod = async (url: string) => {
+    setData(null);
+    setLoading(true);
+    setError(null);
+
+    try {
+      const res = await fetch(url);
+
+      if (!res.ok) {
+        setData(null);
+        setError(res.statusText);
+        return;
+      }
+
+      const data = await res.json();
+      if (!data) {
+        setData(null);
+        setError("No data received");
+        return;
+      }
+      setData(data);
+    } catch {
+      setData(null);
+      setError("Network error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const postMethod = async (url: string, data: TRequest) => {
+    setData(null);
     setLoading(true);
     setError(null);
 
@@ -38,5 +66,34 @@ export default function useFetch<TResponse, TRequest = null>() {
     }
   };
 
-  return { data, loading, error, getMethod, postMethod };
+  const deleteMethod = async (url: string) => {
+    setData(null);
+    setLoading(true);
+    setError(null);
+
+    try {
+      const res = await fetch(url);
+
+      if (!res.ok) {
+        setData(null);
+        setError(res.statusText);
+        return;
+      }
+
+      const data = await res.json();
+      if (!data) {
+        setData(null);
+        setError("No data received");
+        return;
+      }
+      setData(data);
+    } catch {
+      setData(null);
+      setError("Network error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { data, loading, error, getMethod, postMethod, deleteMethod };
 }

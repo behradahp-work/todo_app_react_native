@@ -1,5 +1,5 @@
 // React Native
-import { View, TouchableOpacity, Pressable, Text } from "react-native";
+import { View, TouchableOpacity, Pressable, Text, Alert } from "react-native";
 
 // Styles
 import themedStyles from "./styles";
@@ -13,13 +13,40 @@ import { Ionicons } from "@expo/vector-icons";
 // Types
 import { Todo } from "@/types/todo.types";
 
-const TodoCard = ({ todo, colors }: { todo: Todo; colors: ColorScheme }) => {
+const TodoCard = ({
+  todo,
+  colors,
+  onDelete,
+  onStatusChange,
+  onClickEdit,
+}: {
+  todo: Todo;
+  colors: ColorScheme;
+  onDelete: () => void;
+  onStatusChange: () => void;
+  onClickEdit: () => void;
+}) => {
   const styles = themedStyles(todo.completed, colors);
+
+  const createTwoButtonAlert = () =>
+    Alert.alert("Delete Todo", "Are you sure you want to delete this todo?", [
+      {
+        text: "Cancel",
+        onPress: () => {},
+        style: "cancel",
+      },
+      {
+        text: "Delete",
+        onPress: () => onDelete(),
+      },
+    ]);
 
   return (
     <View style={styles.container}>
-      <Pressable style={styles.checkmark}>
-        {todo.completed && <Ionicons name='checkmark' color={colors.surface} />}
+      <Pressable style={styles.checkmark} onPress={onStatusChange}>
+        {todo.completed && (
+          <Ionicons name='checkmark' color={colors.surface} size={20} />
+        )}
       </Pressable>
 
       <View style={styles.leftContainer}>
@@ -28,13 +55,13 @@ const TodoCard = ({ todo, colors }: { todo: Todo; colors: ColorScheme }) => {
         <View style={styles.actionsContainer}>
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: colors.warning }}
-            onPress={() => {}}
+            onPress={() => onClickEdit()}
           >
             <Ionicons name='pencil' color={colors.surface} size={18} />
           </TouchableOpacity>
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: colors.danger }}
-            onPress={() => {}}
+            onPress={createTwoButtonAlert}
           >
             <Ionicons name='trash' color={colors.surface} size={18} />
           </TouchableOpacity>

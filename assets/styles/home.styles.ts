@@ -15,5 +15,10 @@ export default function homeStyles(colors: ColorScheme) {
     scrollView: {
       gap: 30,
     },
+    noDataTitle: {
+      fontSize: 25,
+      fontWeight: "bold",
+      color: colors.textMuted,
+    },
   });
 }

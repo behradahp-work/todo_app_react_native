@@ -4,7 +4,7 @@ import { ColorScheme } from "@/types/common.types";
 // Types
 import { StyleSheet } from "react-native";
 
-export default function themedStyles(colors: ColorScheme) {
+export default function themedStyles(colors: ColorScheme, error: boolean) {
   return StyleSheet.create({
     container: {
       flexDirection: "row",
@@ -24,7 +24,7 @@ export default function themedStyles(colors: ColorScheme) {
       flexGrow: 1,
       minHeight: 55,
       borderWidth: 2,
-      borderColor: colors.border,
+      borderColor: error ? colors.danger : colors.border,
       borderRadius: 14,
       padding: 20,
 
