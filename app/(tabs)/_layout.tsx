@@ -1,33 +1,54 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+// Expo
+import { Tabs } from "expo-router";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+// Icons
+import { Ionicons } from "@expo/vector-icons";
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+// Theme Hook
+import { useTheme } from "@/context/ThemeProvider";
+
+export default function TabsLayout() {
+  const { colors } = useTheme();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.textMuted,
+        sceneStyle: {
+          backgroundColor: colors.bg,
+        },
+        tabBarStyle: {
+          height: 90,
+          paddingBottom: 30,
+          paddingTop: 10,
+          backgroundColor: colors.surface,
+          borderTopWidth: 1,
+          borderTopColor: colors.border,
+        },
+        tabBarLabelStyle: {
+          fontSize: 14,
+          fontWeight: "600",
+        },
+      }}
+    >
       <Tabs.Screen
-        name="index"
+        name='index'
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "Todos",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name='flash-outline' color={color} size={size} />
+          ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name='settings'
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "Settings",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name='settings' color={color} size={size} />
+          ),
         }}
       />
     </Tabs>
