@@ -12,5 +12,8 @@ export default function homeStyles(colors: ColorScheme) {
       paddingTop: 15,
       paddingHorizontal: 25,
     },
+    scrollView: {
+      gap: 30,
+    },
   });
 }
