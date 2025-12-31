@@ -1,50 +1,119 @@
-# Welcome to your Expo app 👋
+# 📝 Todo App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern, feature-rich Todo application built with **React Native** and **Expo**. Manage your daily tasks efficiently with a clean UI, theme support, and seamless authentication.
 
-## Get started
+---
 
-1. Install dependencies
+## ✨ Features
+
+- **🔐 Authentication**: Secure login flow using username/password (integrated with DummyJSON Auth).
+- **✅ Task Management**:
+  - **Create**: Add new tasks easily.
+  - **Read**: View your personal todo list.
+  - **Update**: Edit task details and toggle completion status.
+  - **Delete**: Remove tasks you no longer need.
+- **📊 Progress Tracking**: Visual progress bar to track your completion rate.
+- **🎨 Theme Support**: Fully customizable **Dark** and **Light** modes (persisted locally).
+- **📱 Responsive Design**: Optimized for both iOS and Android devices.
+- **💾 Local Storage**: Preferences and Auth state are persisted using Async Storage.
+
+---
+
+## 🛠 Tech Stack
+
+- **Core**: [React Native](https://reactnative.dev/), [Expo](https://expo.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Routing**: [Expo Router](https://docs.expo.dev/router/introduction/)
+- **Navigation**: React Navigation (Bottom Tabs)
+- **State Management**: React Context API
+- **Storage**: @react-native-async-storage/async-storage
+- **API**: [DummyJSON](https://dummyjson.com/)
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to set up the project locally.
+
+### Prerequisites
+
+Ensure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (LTS recommended)
+- [Expo Go](https://expo.dev/client) app on your mobile device (or an emulator).
+
+### Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/yourusername/todo-app.git
+   cd todo_app
+   ```
+
+2. **Install dependencies:**
 
    ```bash
    npm install
+   # or
+   yarn install
    ```
 
-2. Start the app
+3. **Start the development server:**
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+4. **Run on device/emulator:**
+   - **Mobile**: Scan the QR code with the **Expo Go** app (Android) or Camera app (iOS).
+   - **Emulator**: Press `a` for Android Emulator or `i` for iOS Simulator.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 📂 Project Structure
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+todo_app/
+├── app/                 # Expo Router screens & layout
+│   ├── (tabs)/          # Main tab navigation (Home, Settings)
+│   ├── login.tsx        # Authentication screen
+│   └── _layout.tsx      # Root layout configuration
+├── assets/              # Images, fonts, and styles
+├── components/          # Reusable UI components
+│   ├── home_page/       # Home screen specific components
+│   └── settings_page/   # Settings screen specific components
+├── constants/           # App constants (Colors, API Endpoints)
+├── context/             # Global state (Auth, Theme)
+├── hooks/               # Custom hooks (useFetch, etc.)
+├── types/               # TypeScript definitions
+└── .gitignore           # Git ignore rules
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## 📸 Screenshots
 
-To learn more about developing your project with Expo, look at the following resources:
+|                   Login Screen                    |   Home Screen (Light)   |   Home Screen (Dark)    |        Settings         |
+| :-----------------------------------------------: | :---------------------: | :---------------------: | :---------------------: |
+| <img src="assets/images/login.png" width="200" /> | <!-- Add Screenshot --> | <!-- Add Screenshot --> | <!-- Add Screenshot --> |
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+> _Note: Replace the placeholder comments above with actual screenshots of your app._
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+## 🤝 Contributing
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Contributions are welcome! Please follow these steps:
+
+1. Fork the project.
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
