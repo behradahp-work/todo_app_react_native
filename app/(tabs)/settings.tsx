@@ -24,21 +24,14 @@ import { Todo } from "@/types/todo.types";
 // Icons
 import { Ionicons } from "@expo/vector-icons";
 
+// Todos Hook
+import { useTodos } from "@/context/TodosProvider";
+
 const Settings = () => {
+  const { count, active, completed } = useTodos();
+
   const { colors, toggleDarkMode, isDarkMode } = useTheme();
   const styles = settingsStyles(colors);
-  const [todos, setTodos] = useState<Todo[]>([]);
-
-  useEffect(() => {
-    const fetchTodos = async () => {
-      const localTodos = await AsyncStorage.getItem("todos");
-      if (localTodos) {
-        setTodos(JSON.parse(localTodos));
-      }
-    };
-
-    fetchTodos();
-  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -51,28 +44,22 @@ const Settings = () => {
             colors={colors}
             mainColor={colors.primary}
             title='Total Todos'
-            number={todos.length}
-            icon={<Ionicons name='list' size={25} color={colors.surface} />}
+            number={count}
+            icon={<Ionicons name='list' size={25} color='white' />}
           />
           <StatsCard
             colors={colors}
             mainColor={colors.success}
             title='Completed'
-            number={todos.filter((todo) => todo.completed).length}
-            icon={
-              <Ionicons
-                name='checkmark-circle'
-                size={25}
-                color={colors.surface}
-              />
-            }
+            number={completed}
+            icon={<Ionicons name='checkmark-circle' size={25} color='white' />}
           />
           <StatsCard
             colors={colors}
             mainColor={colors.warning}
             title='Active'
-            number={todos.filter((todo) => !todo.completed).length}
-            icon={<Ionicons name='time' size={25} color={colors.surface} />}
+            number={active}
+            icon={<Ionicons name='time' size={25} color='white' />}
           />
         </SettingSection>
 
@@ -82,7 +69,7 @@ const Settings = () => {
             colors={colors}
             mainColor={colors.primary}
             title='Dark Mode'
-            icon={<Ionicons name='moon' size={25} color={colors.surface} />}
+            icon={<Ionicons name='moon' size={25} color='white' />}
             active={isDarkMode}
             onPress={() => toggleDarkMode()}
           />

@@ -7,12 +7,17 @@ import { ThemeProvider } from "@/context/ThemeProvider";
 // Theme Context
 import { AuthProvider } from "@/context/AuthProvider";
 
+// Todos Context
+import { TodosProvider } from "@/context/TodosProvider";
+
 export default function RootLayout() {
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <Routes />
-      </AuthProvider>
-    </ThemeProvider>
+    <TodosProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
+      </ThemeProvider>
+    </TodosProvider>
   );
 }

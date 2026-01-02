@@ -4,7 +4,7 @@ import { ColorScheme } from "@/types/common.types";
 // Types
 import { StyleSheet } from "react-native";
 
-export default function themedStyles(colors: ColorScheme) {
+export default function themedStyles(colors: ColorScheme, percent: number) {
   return StyleSheet.create({
     container: {
       flexDirection: "row",
@@ -18,7 +18,7 @@ export default function themedStyles(colors: ColorScheme) {
       backgroundColor: colors.border,
     },
     progress: {
-      width: "50%",
+      width: `${percent}%`,
       height: "100%",
       borderRadius: 100,
     },

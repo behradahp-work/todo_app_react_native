@@ -1,5 +1,8 @@
 export const API_ENDPOINTS = {
-  getUserTodos: "https://dummyjson.com/todos/user/",
-  addTodo: "https://dummyjson.com/todos/add",
-  deleteTodo: "https://dummyjson.com/todos/",
+  getTodos: "https://recipe-api.liara.run/api/todos",
+  addTodo: "https://recipe-api.liara.run/api/todos",
+  updateTodo: (id: number) => `https://recipe-api.liara.run/api/todos/${id}`,
+  changeTodoStatus: (id: number) =>
+    `https://recipe-api.liara.run/api/todos/${id}/status`,
+  deleteTodo: (id: number) => `https://recipe-api.liara.run/api/todos/${id}`,
 };

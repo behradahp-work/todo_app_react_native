@@ -22,7 +22,7 @@ const SettingsPageTitle = ({ colors }: { colors: ColorScheme }) => {
         colors={colors.gradients.primary}
         style={styles.iconContainer}
       >
-        <Ionicons name='settings' color={colors.surface} size={30} />
+        <Ionicons name='settings' color={"white"} size={30} />
       </LinearGradient>
 
       <Text style={styles.mainTitle}>Settings</Text>

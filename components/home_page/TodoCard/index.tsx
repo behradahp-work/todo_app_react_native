@@ -13,19 +13,20 @@ import { Ionicons } from "@expo/vector-icons";
 // Types
 import { Todo } from "@/types/todo.types";
 
+// Todos Hook
+import { useTodos } from "@/context/TodosProvider";
+
 const TodoCard = ({
   todo,
   colors,
-  onDelete,
-  onStatusChange,
   onClickEdit,
 }: {
   todo: Todo;
   colors: ColorScheme;
-  onDelete: () => void;
-  onStatusChange: () => void;
   onClickEdit: () => void;
 }) => {
+  const { changeTodoStatus, deleteTodo } = useTodos();
+
   const styles = themedStyles(todo.completed, colors);
 
   const createTwoButtonAlert = () =>
@@ -37,13 +38,18 @@ const TodoCard = ({
       },
       {
         text: "Delete",
-        onPress: () => onDelete(),
+        onPress: () => deleteTodo(todo.id),
       },
     ]);
 
   return (
     <View style={styles.container}>
-      <Pressable style={styles.checkmark} onPress={onStatusChange}>
+      <Pressable
+        style={styles.checkmark}
+        onPress={() =>
+          changeTodoStatus(todo.id, { completed: !todo.completed })
+        }
+      >
         {todo.completed && (
           <Ionicons name='checkmark' color={colors.surface} size={20} />
         )}
@@ -57,13 +63,13 @@ const TodoCard = ({
             style={{ ...styles.button, backgroundColor: colors.warning }}
             onPress={() => onClickEdit()}
           >
-            <Ionicons name='pencil' color={colors.surface} size={18} />
+            <Ionicons name='pencil' color='white' size={18} />
           </TouchableOpacity>
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: colors.danger }}
             onPress={createTwoButtonAlert}
           >
-            <Ionicons name='trash' color={colors.surface} size={18} />
+            <Ionicons name='trash' color='white' size={18} />
           </TouchableOpacity>
         </View>
       </View>

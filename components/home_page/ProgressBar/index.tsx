@@ -10,8 +10,13 @@ import { ColorScheme } from "@/types/common.types";
 // Styles
 import themedStyles from "./styles";
 
+// Todos Hook
+import { useTodos } from "@/context/TodosProvider";
+
 const ProgressBar = ({ colors }: { colors: ColorScheme }) => {
-  const styles = themedStyles(colors);
+  const { count, completed } = useTodos();
+  const percent = count === 0 ? 0 : Math.floor((completed / count) * 100);
+  const styles = themedStyles(colors, percent);
 
   return (
     <View style={styles.container}>
@@ -21,7 +26,7 @@ const ProgressBar = ({ colors }: { colors: ColorScheme }) => {
           style={styles.progress}
         />
       </View>
-      <Text style={styles.text}>50%</Text>
+      <Text style={styles.text}>{percent}%</Text>
     </View>
   );
 };

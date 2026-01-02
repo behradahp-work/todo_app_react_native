@@ -16,7 +16,7 @@ export default function themedStyles(completed: boolean, colors: ColorScheme) {
       shadowOpacity: 0.22,
       shadowRadius: 2.22,
       elevation: 3,
-      marginBottom: 30,
+      marginBottom: 15,
     },
     checkmark: {
       justifyContent: "center",

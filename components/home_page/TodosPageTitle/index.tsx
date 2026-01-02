@@ -13,7 +13,11 @@ import themedStyles from "./styles";
 // Icons
 import { Ionicons } from "@expo/vector-icons";
 
+// Todos Hook
+import { useTodos } from "@/context/TodosProvider";
+
 const TodosPageTitle = ({ colors }: { colors: ColorScheme }) => {
+  const { count, completed } = useTodos();
   const styles = themedStyles(colors);
 
   return (
@@ -22,12 +26,14 @@ const TodosPageTitle = ({ colors }: { colors: ColorScheme }) => {
         colors={colors.gradients.primary}
         style={styles.iconContainer}
       >
-        <Ionicons name='flash-outline' color={colors.surface} size={30} />
+        <Ionicons name='flash-outline' color={"white"} size={30} />
       </LinearGradient>
 
       <View style={styles.textsContainer}>
         <Text style={styles.mainTitle}>Today's Tasks</Text>
-        <Text style={styles.completedTasks}>2 of 4 completed</Text>
+        <Text style={styles.completedTasks}>
+          {completed} of {count} completed
+        </Text>
       </View>
 
       <Text style={{ fontSize: 30 }}>👀</Text>

@@ -14,23 +14,21 @@ import { AddTodoPayload, Todo } from "@/types/todo.types";
 // Icons
 import { Ionicons } from "@expo/vector-icons";
 
+// Todos Hook
+import { useTodos } from "@/context/TodosProvider";
+
 const AddTodo = ({
   colors,
-  userId,
   editableTodo,
-  onAdd,
-  onEdit,
 }: {
   colors: ColorScheme;
-  userId: number;
   editableTodo: Todo | null;
-  onAdd: (paylaod: AddTodoPayload) => void;
-  onEdit: (paylaod: AddTodoPayload) => void;
 }) => {
+  const { addTodo, updateTodo } = useTodos();
+
   const [paylaod, setPaylaod] = useState<AddTodoPayload>({
     todo: "",
     completed: false,
-    userId: userId,
   });
   const [error, setError] = useState<boolean>(false);
   const styles = themedStyles(colors, error);
@@ -40,7 +38,6 @@ const AddTodo = ({
       setPaylaod({
         todo: editableTodo.todo,
         completed: editableTodo.completed,
-        userId: editableTodo.userId,
       });
     }
   }, [editableTodo]);
@@ -49,16 +46,17 @@ const AddTodo = ({
     if (!paylaod.todo) setError(true);
     else {
       setError(false);
-      onAdd(paylaod);
-      setPaylaod({ todo: "", completed: false, userId: userId });
+      addTodo(paylaod);
+      setPaylaod({ todo: "", completed: false });
     }
   };
   const handleEditTodo = () => {
+    if (!editableTodo) return;
     if (!paylaod.todo) setError(true);
     else {
       setError(false);
-      onEdit(paylaod);
-      setPaylaod({ todo: "", completed: false, userId: userId });
+      updateTodo(editableTodo.id, paylaod);
+      setPaylaod({ todo: "", completed: false });
     }
   };
 
@@ -67,7 +65,7 @@ const AddTodo = ({
       <TextInput
         style={styles.input}
         placeholder='What need to be done?'
-        placeholderTextColor={colors.surface}
+        placeholderTextColor={colors.textMuted}
         value={paylaod.todo}
         onChangeText={(text) => setPaylaod({ ...paylaod, todo: text })}
       />
@@ -78,7 +76,7 @@ const AddTodo = ({
         <Ionicons
           name={editableTodo ? "pencil" : "add"}
           size={30}
-          color={colors.surface}
+          color='white'
         />
       </TouchableOpacity>
     </View>

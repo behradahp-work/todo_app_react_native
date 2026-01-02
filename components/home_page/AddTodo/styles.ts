@@ -28,6 +28,7 @@ export default function themedStyles(colors: ColorScheme, error: boolean) {
       borderRadius: 14,
       padding: 20,
 
+      color: colors.text,
       fontSize: 20,
       fontWeight: "medium",
     },
