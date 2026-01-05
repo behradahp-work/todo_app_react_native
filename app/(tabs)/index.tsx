@@ -20,16 +20,12 @@ import homeStyles from "@/assets/styles/home.styles";
 // Types
 import { Todo } from "@/types/todo.types";
 
-// Auth Hook
-import { useAuth } from "@/context/AuthProvider";
-
 // Todos Hook
 import { useTodos } from "@/context/TodosProvider";
 
 export default function Index() {
   const { todos, loading, getTodos } = useTodos();
 
-  const { user } = useAuth();
   const { colors } = useTheme();
   const styles = homeStyles(colors);
 
@@ -39,8 +35,6 @@ export default function Index() {
   useEffect(() => {
     getTodos();
   }, []);
-
-  if (!user) return null;
 
   return (
     <SafeAreaView style={styles.container}>

@@ -113,6 +113,10 @@ export const TodosProvider = ({ children }: { children: React.ReactNode }) => {
         return todo;
       }),
     ]);
+    setActive(updateTodoStatusData[0].completed ? active - 1 : active + 1);
+    setCompleted(
+      updateTodoStatusData[0].completed ? completed + 1 : completed - 1
+    );
   }, [updateTodoStatusData]);
 
   //   HANDLE DELETE TODO
